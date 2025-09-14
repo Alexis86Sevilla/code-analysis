@@ -1,11 +1,34 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
-
 <Layout>
-	<Welcome />
+    <section class="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900 flex items-center justify-center text-white">
+        <div class="text-center max-w-4xl px-8">
+            <h1 class="text-6xl font-bold mb-6">
+                Código de calidad. <span class="text-purple-400">Analizado</span>.
+            </h1>
+            <p class="text-xl text-gray-300 mb-8">
+                Transform your messy repos into clean masterpieces
+            </p>
+            <a href="/analyze" class="bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 rounded-lg text-lg font-semibold
+            hover:from-purple-700 hover:to-blue-700  inline-block
+            active:from-purple-500 active:to-blue-500 ">
+                Analizar mi repo Ya!
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <p>Explicacion de la app con imagenes bonitas</p>
+        <a href="/analyze" class="cta-button">Analizar mi repo Ya!</a>
+    </section>
+
+    <section>
+        <ul>
+            <li>Aprendes a mejorar tu codigo</li>
+            <li>Rapido y facil</li>
+            <li>Gratis</li>
+            <li>Codigo abierto</li>
+        </ul>
+    </section>
 </Layout>

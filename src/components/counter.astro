@@ -1,0 +1,23 @@
+---
+const {initialValue} = Astro.props;
+const randomId = Math.random();
+const uniqueId = `counter-${randomId}`;
+const buttonId = `button-${randomId}`;
+---
+<script define:vars={{id: uniqueId, button: buttonId}}>
+    document.addEventListener('DOMContentLoaded', function () {
+        let count = parseInt(document.getElementById(id).textContent);
+
+        function increment() {
+            count++;
+            console.log(count);
+            let visualHtml = document.getElementById(id);
+            visualHtml.innerHTML = count.toString();
+        }
+
+        document.getElementById(button).addEventListener('click', increment);
+    });
+</script>
+
+<button id={buttonId}>Incrementa!!</button>
+<p id={uniqueId}>{initialValue}</p>
