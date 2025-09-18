@@ -2,5 +2,31 @@
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout>
-    <h1>analizamos codigo!</h1>
+    <div class="flex flex-col items-center justify-center h-96">
+        <h1>Página de Análisis - En construcción</h1>
+
+        <form action="/api/github" method="POST" id="formData" class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <div class="mb-6">
+                <label for="user" class="block text-gray-700 text-sm font-bold mb-2">
+                    Usuario:
+                </label>
+                <input id="user" name="user" type="text"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                       required>
+            </div>
+            <div class="mb-6">
+                <label for="repository" class="block text-gray-700 text-sm font-bold mb-2">
+                    Repositorio:
+                </label>
+                <input id="repository" name="repository" type="text"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                       required>
+            </div>
+
+            <button type="submit"
+                    class="flex justify-center m-auto w-35 bg-blue-500 hover:bg-blue-700 transition-all ease-in-out text-white font-bold py-2 px-4 rounded-full cursor-pointer">
+                Analizar
+            </button>
+        </form>
+    </div>
 </Layout>
