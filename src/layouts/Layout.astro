@@ -1,5 +1,6 @@
 ---
 import '../styles/tailwind.css';
+import Footer from "../components/footer.astro";
 ---
 <!doctype html>
 <html lang="es">
@@ -13,6 +14,7 @@ import '../styles/tailwind.css';
         <meta name="generator" content={Astro.generator} />
 	</head>
 	<body>
-		<slot />
+		<slot/>
+        <Footer></Footer>
 	</body>
 </html>
