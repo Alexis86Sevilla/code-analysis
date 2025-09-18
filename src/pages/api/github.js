@@ -11,6 +11,5 @@ export async function POST(request) {
     });
 
     const data = await response.json();
-    console.warn(data)
     return new Response(JSON.stringify(data));
 }

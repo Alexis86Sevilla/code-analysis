@@ -2,31 +2,61 @@
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout>
-    <div class="flex flex-col items-center justify-center h-96">
-        <h1>Página de Análisis - En construcción</h1>
+    <div class="flex flex-col items-center bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 min-h-screen">
+        <h1 class="text-white text-center text-5xl mt-20 mb-10 font-extrabold">Analiza tu repositorio de GitHub</h1>
+        <p class="text-gray-300 text-xl mb-20">Obtén métricas y estadísticas al instante</p>
 
-        <form action="/api/github" method="POST" id="formData" class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <form id="formData"
+              class="bg-white/95 shadow-2xl mx-14 sm:mx-0 p-8 rounded-2xl max-w-md w-full">
             <div class="mb-6">
                 <label for="user" class="block text-gray-700 text-sm font-bold mb-2">
                     Usuario:
                 </label>
                 <input id="user" name="user" type="text"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                       required>
+                       class="w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+                       placeholder="Nombre del usuario" required>
             </div>
             <div class="mb-6">
                 <label for="repository" class="block text-gray-700 text-sm font-bold mb-2">
                     Repositorio:
                 </label>
                 <input id="repository" name="repository" type="text"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                       required>
+                       class="w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+                       placeholder="Nombre del repositorio" required>
             </div>
 
             <button type="submit"
-                    class="flex justify-center m-auto w-35 bg-blue-500 hover:bg-blue-700 transition-all ease-in-out text-white font-bold py-2 px-4 rounded-full cursor-pointer">
+                    class="w-full bg-gradient-to-r from-purple-600 to-blue-600
+                    hover:from-purple-700 hover:to-blue-700
+                    active:from-purple-500 active:to-blue-500
+                    transition-all ease-in-out text-white font-bold py-2 px-4 rounded-full cursor-pointer">
                 Analizar
             </button>
         </form>
     </div>
+
+    <script>
+        const form = document.getElementById('formData');
+
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault()
+
+                const user = form.querySelector('#user')!.value;
+                const repository = form.querySelector('#repository')!.value;
+
+                const formData = new FormData();
+                formData.append('user', user);
+                formData.append('repository', repository);
+
+                const response = await fetch('/api/github', {
+                    method: 'POST',
+                    body: formData
+                })
+
+                const data = await response.json();
+                console.warn(data)
+            })
+        }
+    </script>
 </Layout>
