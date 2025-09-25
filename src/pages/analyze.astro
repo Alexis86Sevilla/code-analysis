@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Results from "../components/results.astro";
 ---
 <Layout>
     <div class="flex flex-col items-center bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 min-h-screen">
@@ -33,30 +34,20 @@ import Layout from "../layouts/Layout.astro";
                 Analizar
             </button>
         </form>
+
+        <Results/>
     </div>
 
     <script>
-        const form = document.getElementById('formData');
+        import {getFormDataAndFetch, renderData} from '../utils/repositoryAnalysis.js'
+            const form = document.getElementById('formData');
 
-        if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault()
-
-                const user = form.querySelector('#user')!.value;
-                const repository = form.querySelector('#repository')!.value;
-
-                const formData = new FormData();
-                formData.append('user', user);
-                formData.append('repository', repository);
-
-                const response = await fetch('/api/github', {
-                    method: 'POST',
-                    body: formData
-                })
-
-                const data = await response.json();
-                console.warn(data)
-            })
-        }
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault()
+                    const data = await getFormDataAndFetch(form);
+                    renderData(data);
+                    });
+                }
     </script>
 </Layout>
