@@ -1,65 +1,65 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Footer from "../components/footer.astro";
 ---
 <Layout>
     <section
-            class="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900 flex items-center justify-center text-white">
+            class="min-h-screen bg-gradient-to-br from-[#2A004E] via-[#500073] to-[#2A004E] flex items-center justify-center text-white">
         <div class="text-center max-w-4xl px-8">
             <h1 class="text-6xl font-bold mb-6 ">
-                Código de calidad.
+                Repositorio completo.
             </h1>
             <h1 class="text-6xl font-bold mb-6 ">
-                <span class="text-purple-400">Analizado</span>.
+                <span class="text-[#F14A00]">Al descubierto</span>.
             </h1>
             <p class="text-2xl text-gray-300 mb-8">
-                Conecta tu repo de GitHub y obtén análisis automático de calidad en segundos
+                Conecta tu repo de GitHub y obtén análisis automático en segundos
             </p>
             <p class="text-xl text-gray-300 mb-8">
-                Del desorden al código perfecto.
+                Conoce tu repositorio completamente.
             </p>
-            <a href="/analyze" class="bg-gradient-to-r from-purple-600 to-blue-600
+            <a href="/analyze" class="bg-gradient-to-r from-[#C62300] to-[#F14A00]
             px-8 py-4 rounded-lg text-lg font-semibold
-            hover:from-purple-700 hover:to-blue-700 inline-block
-            active:from-purple-500 active:to-blue-500">
+            hover:from-[#F14A00] hover:to-[#C62300] inline-block
+            active:from-[#500073] active:to-[#C62300]">
                 Analizar mi repo
             </a>
         </div>
     </section>
 
-
-    <section class="py-16 bg-gray-300 flex items-center justify-center">
+    <section class="py-16 bg-gray-100 flex items-center justify-center">
         <ul class="text-center max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
             <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div class="text-3xl mb-4">🚀</div>
-                <h3 class="font-bold text-lg mb-2">Análisis automático</h3>
+                <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Análisis automático</h3>
                 <p class="text-gray-600">Conecta tu repo de GitHub y obtén métricas en segundos</p>
             </li>
             <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div class="text-3xl mb-4">📈</div>
-                <h3 class="font-bold text-lg mb-2">Métricas detalladas</h3>
-                <p class="text-gray-600">Complejidad ciclomática, duplicación de código, cobertura</p>
+                <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Insights avanzados</h3>
+                <p class="text-gray-600">Salud del proyecto, actividad de la comunidad, estructura del código y patrones
+                    de desarrollo</p>
             </li>
             <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div class="text-3xl mb-4">💸</div>
-                <h3 class="font-bold text-lg mb-2">Gratis</h3>
+                <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Gratis</h3>
                 <p class="text-gray-600">Análisis ilimitados sin registro ni pagos</p>
             </li>
             <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div class="text-3xl mb-4">⚙️</div>
-                <h3 class="font-bold text-lg mb-2">Transparente y libre</h3>
+                <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Transparente y libre</h3>
                 <p class="text-gray-600">Código fuente disponible, modifica y mejora</p>
             </li>
         </ul>
     </section>
 
     <section
-            class="min-h-screen px-8 bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900
+            class="min-h-screen px-8 bg-gradient-to-br from-[#2A004E] via-[#500073] to-[#2A004E]
             flex items-center justify-center flex-col text-white text-center">
-        <p class="text-4xl md:text-5xl mb-14">Tu código merece algo <span class="underline">mejor</span></p>
-        <a href="/analyze" class="cta-button border-4 rounded-full border-white py-5 sm:px-12 sm:py-8
-        bg-gradient-to-br from-cyan-400 to-blue-600 hover:animate-pulse hover:scale-110 transition-all duration-300 shadow-2xl">
-            <span class="text-white font-bold text-3xl md:text-4xl lg:text-5xl">¿Listo para el código perfecto?</span>
+        <p class="text-4xl md:text-5xl mb-14">Tu repositorio merece ser <span class="underline decoration-[#F14A00]">entendido</span>
+        </p>
+        <a href="/analyze" class="border-4 rounded-full border-white py-5 px-7
+        bg-gradient-to-br from-[#F14A00] to-[#C62300] hover:animate-pulse hover:scale-110 transition-all duration-300 shadow-2xl">
+            <span class="text-white font-bold text-2xl md:text-4xl lg:text-5xl">¿Listo para descubrirlo?</span>
         </a>
     </section>
 </Layout>
