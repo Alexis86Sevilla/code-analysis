@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Results from "../components/analyze/results.astro";
 import Form from "../components/analyze/form.astro";
+import TabsContainer from "../components/analyze/tabs/tabsContainer.astro";
 ---
 <Layout>
     <div class="flex flex-col items-center bg-gradient-to-br from-[#2A004E] via-[#500073] to-[#2A004E] min-h-screen">
@@ -10,11 +10,12 @@ import Form from "../components/analyze/form.astro";
 
         <Form/>
 
-        <Results/>
+        <TabsContainer/>
     </div>
 
     <script>
-        import {getFormDataAndFetch, renderData} from '../utils/repositoryAnalysis.js'
+        import {renderOverview} from '../utils/renderOverview.js';
+        import {getFormDataAndFetch} from '../utils/fetchData.js'
 
         const form = document.getElementById('formData');
 
@@ -22,7 +23,7 @@ import Form from "../components/analyze/form.astro";
             form.addEventListener('submit', async (e) => {
                 e.preventDefault()
                 const data = await getFormDataAndFetch(form);
-                renderData(data);
+                renderOverview(data.overviewResponse);
             });
         }
     </script>

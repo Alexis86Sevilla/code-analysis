@@ -4,9 +4,10 @@ const containerClasses = 'relative sm:w-90 sm:h-40 bg-gradient-to-br from-white/
 const spanTitleClasses = 'text-sm font-bold text-[#2A004E] uppercase tracking-wider mb-2 opacity-80 group-hover:opacity-100 transition-opacity';
 
 const spanResultClass = "text-3xl font-bold text-[#500073] group-hover:text-[#2A004E] transition-colors duration-300 text-center leading-tight";
+const { class: className } = Astro.props;
 ---
 
-<div class="relative">
+<div class={className}>
     <h2 class="text-white text-center text-5xl mt-20 mb-16 font-extrabold">
         <span class="bg-gradient-to-r from-[#F14A00] to-[#C62300] bg-clip-text text-transparent">
             Métricas básicas

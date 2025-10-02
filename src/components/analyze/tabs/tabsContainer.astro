@@ -1,0 +1,38 @@
+---
+import Overview from "./overview.astro";
+import Languages from "./languages.astro";
+import Contributors from "./contributors.astro";
+import Activity from "./activity.astro";
+---
+
+<div class="tabs-navigation">
+    <button id="general-button" class="cursor-pointer text-white text-2xl" data-tab="overview-tab">General</button>
+    <button id="languages-button" class="cursor-pointer text-white text-2xl" data-tab="languages-tab">Lenguajes</button>
+    <button id="contributors-button" class="cursor-pointer text-white text-2xl" data-tab="contributors-tab">
+        Contribuciones
+    </button>
+    <button id="activity-button" class="cursor-pointer text-white text-2xl" data-tab="activity-tab"> Actividad</button>
+</div>
+
+<Overview class="tab-content overview-tab"/>
+<Languages class="tab-content languages-tab"/>
+<Contributors class="tab-content contributors-tab"/>
+<Activity class="tab-content activity-tab"/>
+
+<script>
+    document.querySelector('.tabs-navigation')!.addEventListener('click', (e) => {
+        if (e.target!.tagName === 'BUTTON') {
+            const tabToShow = e.target!.dataset.tab;
+
+            let tabs = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                if (!tab.classList.contains(tabToShow)) {
+                    tab.style.display = 'none';
+                } else {
+                    tab.style.display = 'block';
+                }
+            });
+        }
+    });
+</script>
