@@ -15,15 +15,20 @@ import TabsContainer from "../components/analyze/tabs/tabsContainer.astro";
 
     <script>
         import {renderOverview} from '../utils/renderOverview.js';
+        import {renderLanguages} from '../utils/renderLanguages.js';
         import {getFormDataAndFetch} from '../utils/fetchData.js'
+        import {renderContributors} from '../utils/renderContributors.js'
 
         const form = document.getElementById('formData');
 
         if (form) {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault()
-                const data = await getFormDataAndFetch(form);
-                renderOverview(data.overviewResponse);
+                //const data = await getFormDataAndFetch(form);
+                // console.warn('languagesResponse:', data.languagesResponse);
+                // renderOverview(data.overviewResponse);
+                //renderLanguages(null, true);
+                renderContributors(null, true);
             });
         }
     </script>

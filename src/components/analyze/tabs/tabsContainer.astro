@@ -3,36 +3,67 @@ import Overview from "./overview.astro";
 import Languages from "./languages.astro";
 import Contributors from "./contributors.astro";
 import Activity from "./activity.astro";
+
+const buttonClass = 'cursor-pointer tab-button px-8 py-3 text-lg font-semibold rounded-full transition-all duration-300 bg-white/10 text-white border-2 border-white/20 hover:bg-gradient-to-r hover:from-[#F14A00] hover:to-[#C62300] hover:border-transparent hover:scale-105 hover:shadow-lg hover:shadow-[#F14A00]/50'
 ---
 
-<div class="tabs-navigation">
-    <button id="general-button" class="cursor-pointer text-white text-2xl" data-tab="overview-tab">General</button>
-    <button id="languages-button" class="cursor-pointer text-white text-2xl" data-tab="languages-tab">Lenguajes</button>
-    <button id="contributors-button" class="cursor-pointer text-white text-2xl" data-tab="contributors-tab">
+<div class="tabs-navigation flex justify-center gap-4 mt-10 flex-wrap px-4">
+    <button
+            id="general-button"
+            class={buttonClass}
+            data-tab="overview-tab">
+        General
+    </button>
+    <button
+            id="languages-button"
+            class={buttonClass}
+            data-tab="languages-tab">
+        Lenguajes
+    </button>
+    <button
+            id="contributors-button"
+            class={buttonClass}
+            data-tab="contributors-tab">
         Contribuciones
     </button>
-    <button id="activity-button" class="cursor-pointer text-white text-2xl" data-tab="activity-tab"> Actividad</button>
+    <button
+            id="activity-button"
+            class={buttonClass}
+            data-tab="activity-tab">
+        Actividad
+    </button>
 </div>
-
 <Overview class="tab-content overview-tab"/>
 <Languages class="tab-content languages-tab"/>
 <Contributors class="tab-content contributors-tab"/>
 <Activity class="tab-content activity-tab"/>
 
 <script>
-    document.querySelector('.tabs-navigation')!.addEventListener('click', (e) => {
-        if (e.target!.tagName === 'BUTTON') {
-            const tabToShow = e.target!.dataset.tab;
+    const tabs = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-button');
 
-            let tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach((tab, index) => {
+        tab.style.display = index === 0 ? 'block' : 'none';
+    });
+
+    buttons[0].classList.add('bg-gradient-to-r', 'from-[#F14A00]', 'to-[#C62300]', 'border-transparent', 'shadow-lg');
+    buttons[0].classList.remove('bg-white/10', 'border-white/20');
+
+    document.querySelector('.tabs-navigation')!.addEventListener('click', (e) => {
+        if (e.target && e.target.tagName === 'BUTTON') {
+            const tabToShow = e.target.dataset!.tab;
 
             tabs.forEach(tab => {
-                if (!tab.classList.contains(tabToShow)) {
-                    tab.style.display = 'none';
-                } else {
-                    tab.style.display = 'block';
-                }
+                tab.style.display = tab.classList.contains(tabToShow) ? 'block' : 'none';
             });
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-gradient-to-r', 'from-[#F14A00]', 'to-[#C62300]', 'border-transparent', 'shadow-lg');
+                btn.classList.add('bg-white/10', 'border-white/20');
+            });
+
+            e.target.classList.add('bg-gradient-to-r', 'from-[#F14A00]', 'to-[#C62300]', 'border-transparent', 'shadow-lg');
+            e.target.classList.remove('bg-white/10', 'border-white/20');
         }
     });
 </script>

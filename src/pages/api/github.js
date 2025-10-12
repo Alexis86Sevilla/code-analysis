@@ -18,7 +18,7 @@ export async function POST(request) {
     const languagesResponse = returnStatusFulfilled(response2) ? await response2.value.json() : null;
     const contributorsResponse = returnStatusFulfilled(response3) ? await response3.value.json() : null;
     const commitActivityResponse = returnStatusFulfilled(response4) ? await response4.value.json() : null;
-
+    console.warn('contributorsResponse:', contributorsResponse);
     return new Response(JSON.stringify({
         overviewResponse,
         languagesResponse,

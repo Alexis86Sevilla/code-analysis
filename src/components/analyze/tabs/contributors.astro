@@ -3,5 +3,16 @@ const {class: className} = Astro.props;
 ---
 
 <div class={className}>
-    <h1>Contribuciones</h1>
+    <h2 class="text-white text-center text-5xl mt-20 mb-16 font-extrabold">
+        <span class="bg-gradient-to-r from-[#F14A00] to-[#C62300] bg-clip-text text-transparent">
+            Contribuciones
+        </span>
+    </h2>
+    <div class="w-full max-w-5xl mx-auto" style="height: 600px; width: 500px;">
+        <canvas id="contributors-chart"></canvas>
+    </div>
+
+    <div id="contributors-list" class="flex justify-center gap-6 mt-12 flex-wrap mb-20"></div>
+
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
