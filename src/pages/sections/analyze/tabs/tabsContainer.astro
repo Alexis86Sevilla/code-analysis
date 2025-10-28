@@ -3,41 +3,40 @@ import Overview from "./overview.astro";
 import Languages from "./languages.astro";
 import Contributors from "./contributors.astro";
 import Activity from "./activity.astro";
-
 const buttonClass = 'cursor-pointer tab-button px-8 py-3 text-lg font-semibold rounded-full transition-all duration-300 bg-white/10 text-white border-2 border-white/20 hover:bg-gradient-to-r hover:from-[#F14A00] hover:to-[#C62300] hover:border-transparent hover:scale-105 hover:shadow-lg hover:shadow-[#F14A00]/50'
 ---
-
-<div class="tabs-navigation flex justify-center gap-4 mt-10 flex-wrap px-4">
-    <button
-            id="general-button"
-            class={buttonClass}
-            data-tab="overview-tab">
-        General
-    </button>
-    <button
-            id="languages-button"
-            class={buttonClass}
-            data-tab="languages-tab">
-        Lenguajes
-    </button>
-    <button
-            id="contributors-button"
-            class={buttonClass}
-            data-tab="contributors-tab">
-        Contribuciones
-    </button>
-    <button
-            id="activity-button"
-            class={buttonClass}
-            data-tab="activity-tab">
-        Actividad
-    </button>
+<div id="tabs-container" class="hidden">
+    <div class="tabs-navigation flex justify-center gap-4 mt-10 flex-wrap px-4">
+        <button
+                id="general-button"
+                class={buttonClass}
+                data-tab="overview-tab">
+            General
+        </button>
+        <button
+                id="languages-button"
+                class={buttonClass}
+                data-tab="languages-tab">
+            Lenguajes
+        </button>
+        <button
+                id="contributors-button"
+                class={buttonClass}
+                data-tab="contributors-tab">
+            Contribuciones
+        </button>
+        <button
+                id="activity-button"
+                class={buttonClass}
+                data-tab="activity-tab">
+            Actividad
+        </button>
+    </div>
+    <Overview class="tab-content overview-tab"/>
+    <Languages class="tab-content languages-tab"/>
+    <Contributors class="tab-content contributors-tab"/>
+    <Activity class="tab-content activity-tab"/>
 </div>
-<Overview class="tab-content overview-tab"/>
-<Languages class="tab-content languages-tab"/>
-<Contributors class="tab-content contributors-tab"/>
-<Activity class="tab-content activity-tab"/>
-
 <script>
     const tabs = document.querySelectorAll('.tab-content');
     const buttons = document.querySelectorAll('.tab-button');
