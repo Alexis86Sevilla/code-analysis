@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Form from "../components/analyze/form.astro";
-import TabsContainer from "../components/analyze/tabs/tabsContainer.astro";
+import Form from "./sections/analyze/form.astro";
+import TabsContainer from "./sections/analyze/tabs/tabsContainer.astro";
 ---
 <Layout>
     <div class="flex flex-col items-center bg-gradient-to-br from-[#2A004E] via-[#500073] to-[#2A004E] min-h-screen">
@@ -18,17 +18,20 @@ import TabsContainer from "../components/analyze/tabs/tabsContainer.astro";
         import {renderLanguages} from '../utils/renderLanguages.js';
         import {getFormDataAndFetch} from '../utils/fetchData.js'
         import {renderContributors} from '../utils/renderContributors.js'
+        import {renderActivity} from '../utils/renderActivity.js'
 
         const form = document.getElementById('formData');
+        const tabsContainer = document.getElementById('tabs-container');
 
         if (form) {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault()
-                //const data = await getFormDataAndFetch(form);
-                // console.warn('languagesResponse:', data.languagesResponse);
-                // renderOverview(data.overviewResponse);
-                //renderLanguages(null, true);
-                renderContributors(null, true);
+                const data = await getFormDataAndFetch(form);
+                renderOverview(data.overviewResponse);
+                renderLanguages(data.languagesResponse);
+                renderContributors(data.contributorsResponse);
+                renderActivity(data.commitActivityResponse);
+                tabsContainer!.classList.remove('hidden');
             });
         }
     </script>
