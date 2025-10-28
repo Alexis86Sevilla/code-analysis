@@ -1,20 +1,6 @@
-const MOCK_DATA = {
-    TypeScript: 73430019,
-    CSS: 1091846,
-    JavaScript: 851692,
-    Rust: 501587,
-    HTML: 356765,
-    "Inno Setup": 311668,
-    Scilab: 202892,
-    Shell: 104509,
-    Batchfile: 19230,
-    PowerShell: 15311
-};
+export function renderLanguages(data) {
 
-export function renderLanguages(data, useMock = false) {
-    const dataToUse = useMock ? MOCK_DATA : data;
-
-    const results = Object.entries(dataToUse).sort((a, b) => b[1] - a[1]);
+    const results = Object.entries(data).sort((a, b) => b[1] - a[1]);
 
     const top10 = results.slice(0, 10);
     const others = results.slice(10);

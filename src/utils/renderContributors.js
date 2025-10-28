@@ -1,54 +1,10 @@
-const MOCK_DATA = [
-    {
-        login: "Sir_Codealot",
-        contributions: 912,
-        avatar_url: "https://avatars.githubusercontent.com/u/900690?v=4",
-        url: "https://github.com/Sir_Codealot"
-    },
-    {
-        login: "SpamAndPush",
-        contributions: 845,
-        avatar_url: "https://avatars.githubusercontent.com/u/900690?v=4",
-        url: "https://github.com/SpamAndPush"
-    },
-    {
-        login: "DeadParrotDev",
-        contributions: 732,
-        avatar_url: "https://avatars.githubusercontent.com/u/900690?v=4",
-        url: "https://github.com/DeadParrotDev"
-    },
-    {
-        login: "NiKnight_42",
-        contributions: 688,
-        avatar_url: "https://avatars.githubusercontent.com/u/900690?v=4",
-        url: "https://github.com/NiKnight_42"
-    },
-    {
-        login: "MinistryOfMerges",
-        contributions: 176,
-        avatar_url: "https://avatars.githubusercontent.com/u/900690?v=4",
-        url: "https://github.com/MinistryOfMerges"
-    },
-    {
-        login: "TheHolyPullRequest",
-        contributions: 1543,
-        avatar_url: "https://avatars.githubusercontent.com/u/900690?v=4",
-        url: "https://github.com/TheHolyPullRequest"
-    }
-];
-
-export function renderContributors(data, useMock = false) {
-    const dataToUse = useMock ? MOCK_DATA : data;
-
-    const results = dataToUse.sort((a, b) => b.contributions - a.contributions);
+export function renderContributors(data) {
+    const results = data.sort((a, b) => b.contributions - a.contributions);
 
     const top5 = results.slice(0, 5);
 
     const names = top5.map((e) => e.login);
     const contributions = top5.map((e) => e.contributions);
-    const avatars = top5.map((e) => e.avatar_url);
-    const links = top5.map((e) => e.url);
-
     const canvas = document.getElementById('contributors-chart');
     const ctx = canvas.getContext('2d');
 
@@ -105,7 +61,7 @@ function createChart(names, contributions, ctx) {
                     ticks: {
                         color: '#FFFFFF',
                         font: {
-                            size: 13
+                            size: 12
                         }
                     },
                     grid: {
@@ -166,7 +122,7 @@ function renderAvatarsWithLinks(top5) {
         <a href="${contributor.url}" 
            target="_blank" 
            rel="noopener noreferrer"
-           class="group flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border-2 border-white/20 hover:border-[#F14A00] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F14A00]/30 min-w-[140px] max-w-[180px]">
+           class="group flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border-2 border-white/20 hover:border-[#F14A00] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F14A00]/30 w-[160px]"
             
             <div class="relative mb-4">
                 <img src="${contributor.avatar_url}" 
