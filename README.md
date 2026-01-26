@@ -1,46 +1,88 @@
-# Astro Starter Kit: Basics
+# 📊 GitHub Repository Analyzer
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Una aplicación web moderna construida con Astro y Tailwind CSS que permite analizar repositorios de GitHub y obtener métricas detalladas al instante.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ✨ Características
 
-## 🚀 Project Structure
+- **Análisis de Repositorios**: Ingresa el usuario y nombre del repositorio para obtener estadísticas completas
+- **Vista General**: Información básica del repositorio (descripción, estrellas, forks, issues, etc.)
+- **Lenguajes de Programación**: Visualización de los lenguajes utilizados en el proyecto
+- **Contribuidores**: Lista de colaboradores con sus estadísticas de contribución
+- **Actividad de Commits**: Gráfico de actividad de commits a lo largo del tiempo
+- **Diseño Moderno**: Interfaz con gradientes, glassmorphism y efectos visuales atractivos
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🚀 Estructura del Proyecto
 
 ```text
 /
 ├── public/
 │   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── src/
+│   ├── assets/
+│   │   ├── astro.svg
+│   │   └── background.svg
+│   ├── components/
+│   │   └── footer.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   ├── index.astro                    # Página principal (landing)
+│   │   ├── analyze.astro                  # Página de análisis
+│   │   └── api/
+│   │       └── github.js                  # API endpoint para GitHub
+│   ├── sections/
+│   │   ├── home/
+│   │   │   ├── Hero.astro                 # Sección hero de la landing
+│   │   │   ├── Features.astro             # Características
+│   │   │   ├── Cta.astro                  # Call to action
+│   │   │   └── Faq.astro                  # Preguntas frecuentes
+│   │   └── analyze/
+│   │       ├── form.astro                 # Formulario de búsqueda
+│   │       └── tabs/
+│   │           ├── tabsContainer.astro
+│   │           ├── overview.astro         # Tab de vista general
+│   │           ├── languages.astro        # Tab de lenguajes
+│   │           ├── contributors.astro     # Tab de contribuidores
+│   │           └── activity.astro         # Tab de actividad
+│   ├── styles/
+│   │   └── global.css
+│   └── utils/
+│       ├── fetchData.js                   # Utilidad para fetch de datos
+│       ├── renderOverview.js              # Renderizado de vista general
+│       ├── renderLanguages.js             # Renderizado de lenguajes
+│       ├── renderContributors.js          # Renderizado de contribuidores
+│       └── renderActivity.js              # Renderizado de actividad
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🛠️ Tecnologías Utilizadas
 
-## 🧞 Commands
+- **[Astro](https://astro.build)** - Framework web
+- **[Tailwind CSS](https://tailwindcss.com)** - Framework de CSS utility-first
+- **GitHub API** - Para obtener datos de repositorios
 
-All commands are run from the root of the project, from a terminal:
+## 🧞 Comandos
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+Todos los comandos se ejecutan desde la raíz del proyecto, desde una terminal:
 
-## 👀 Want to learn more?
+| Comando                | Acción                                               |
+| :--------------------- | :--------------------------------------------------- |
+| `pnpm install`         | Instala las dependencias                             |
+| `pnpm dev`             | Inicia el servidor de desarrollo en `localhost:4321` |
+| `pnpm build`           | Construye el sitio de producción en `./dist/`        |
+| `pnpm preview`         | Previsualiza la build localmente antes de desplegar  |
+| `pnpm astro ...`       | Ejecuta comandos CLI como `astro add`, `astro check` |
+| `pnpm astro -- --help` | Obtén ayuda usando el CLI de Astro                   |
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## � Cómo Usar
+
+1. Clona el repositorio
+2. Instala las dependencias con `pnpm install`
+3. Inicia el servidor de desarrollo con `pnpm dev`
+4. Navega a `http://localhost:4321`
+5. Ingresa el usuario y nombre del repositorio de GitHub que deseas analizar
+6. Explora las diferentes pestañas con las métricas del repositorio
+
+## 📝 Notas
+
+- La aplicación utiliza la API pública de GitHub, por lo que puede haber límites de tasa si se realizan muchas consultas
