@@ -134,7 +134,7 @@ function renderAvatarsWithLinks(top5) {
   const html = top5
     .map(
       (contributor, index) => `
-        <a href="${contributor.url}" 
+        <a href="${contributor.html_url}" 
            target="_blank" 
            rel="noopener noreferrer"
            class="group flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border-2 border-white/20 hover:border-[#F14A00] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F14A00]/30 w-[160px]"
