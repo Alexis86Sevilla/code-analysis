@@ -1,42 +1,47 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "./sections/home/Hero.astro";
-import Features from "./sections/home/Features.astro";
-import Cta from "./sections/home/Cta.astro";
-import Faq from "./sections/home/Faq.astro";
+import Hero from "../sections/home/Hero.astro";
+import Features from "../sections/home/Features.astro";
+import Cta from "../sections/home/Cta.astro";
+import Faq from "../sections/home/Faq.astro";
 ---
+
 <Layout>
-    <Hero/>
-    <Features/>
-    <Cta/>
-    <Faq/>
+  <Hero />
+  <Features />
+  <Cta />
+  <Faq />
 </Layout>
 
 <script>
-    const faqItems = document.querySelectorAll('.faq-item');
-    const faqAnswers = document.querySelectorAll('.faq-answer');
-    const allChevrons = document.querySelectorAll('.faq-item svg');
+  const faqItems = document.querySelectorAll(".faq-item");
+  const faqAnswers = document.querySelectorAll(".faq-answer");
+  const allChevrons = document.querySelectorAll(".faq-item svg");
 
-    faqItems.forEach((item) => {
-        item.addEventListener('click', () => {
-            const wasOpen = !item.querySelector('.faq-answer')!.classList.contains('hidden');
+  faqItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const wasOpen = !item
+        .querySelector(".faq-answer")!
+        .classList.contains("hidden");
 
-            faqAnswers.forEach((answer) => {
-                answer.classList.add('hidden');
-            });
+      faqAnswers.forEach((answer) => {
+        answer.classList.add("hidden");
+      });
 
-            allChevrons.forEach((chevron) => {
-                chevron!.classList.remove('rotate-180');
-            })
+      allChevrons.forEach((chevron) => {
+        chevron!.classList.remove("rotate-180");
+      });
 
-            const clickedItem = item.querySelector('.faq-answer');
-            if (!wasOpen) {
-                clickedItem!.classList.remove('hidden');
-                item.querySelector('svg')!.classList.add('transition-all', 'rotate-180');
-            } else {
-                clickedItem!.classList.add('hidden');
-                item.querySelector('svg')!.classList.remove('rotate-180');
-            }
-        });
-    })
+      const clickedItem = item.querySelector(".faq-answer");
+      if (!wasOpen) {
+        clickedItem!.classList.remove("hidden");
+        item
+          .querySelector("svg")!
+          .classList.add("transition-all", "rotate-180");
+      } else {
+        clickedItem!.classList.add("hidden");
+        item.querySelector("svg")!.classList.remove("rotate-180");
+      }
+    });
+  });
 </script>
