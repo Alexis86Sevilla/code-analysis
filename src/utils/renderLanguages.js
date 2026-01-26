@@ -1,5 +1,5 @@
 export function renderLanguages(data) {
-  if (!data) return;
+  if (!data || !Array.isArray(data) || data.length === 0) return;
   const results = Object.entries(data).sort((a, b) => b[1] - a[1]);
 
   const top10 = results.slice(0, 10);

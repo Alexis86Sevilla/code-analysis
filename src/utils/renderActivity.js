@@ -1,5 +1,5 @@
 export function renderActivity(data) {
-  if (!data) return;
+  if (!data || !Array.isArray(data) || data.length === 0) return;
   let monthsData = {};
   for (let week of data) {
     const month = formatDate(new Date(week.week * 1000));

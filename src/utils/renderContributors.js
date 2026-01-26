@@ -1,5 +1,5 @@
 export function renderContributors(data) {
-  if (!data) return;
+  if (!data || !Array.isArray(data) || data.length === 0) return;
   const container = document.getElementById("contributors-list");
   if (container) container.innerHTML = "";
   const results = [...data].sort((a, b) => b.contributions - a.contributions);
