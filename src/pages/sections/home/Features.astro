@@ -1,28 +1,40 @@
 ---
-
+const features = [
+    {
+        emoji: "🚀",
+        title: "Análisis automático",
+        description: "Conecta tu repo de GitHub y obtén métricas en segundos",
+        color: "from-blue-500 to-cyan-500"
+    },
+    {
+        emoji: "📈",
+        title: "Análisis visual completo",
+        description: "Descubre el stack tecnológico, equipo y ritmo de desarrollo",
+        color: "from-purple-500 to-pink-500"
+    },
+    {
+        emoji: "💸",
+        title: "Gratis",
+        description: "Análisis sin registro ni pagos",
+        color: "from-green-500 to-emerald-300"
+    },
+    {
+        emoji: "⚙️",
+        title: "Transparente y libre",
+        description: "Código fuente disponible, modifica y mejora",
+        color: "from-orange-500 to-red-300"
+    }
+];
 ---
 <section class="py-16 bg-gray-100 flex items-center justify-center">
     <ul class="text-center max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
-        <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="text-3xl mb-4">🚀</div>
-            <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Análisis automático</h3>
-            <p class="text-gray-600">Conecta tu repo de GitHub y obtén métricas en segundos</p>
-        </li>
-        <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="text-3xl mb-4">📈</div>
-            <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Análisis visual completo</h3>
-            <p class="text-gray-600">Descubre el stack tecnológico, equipo y ritmo de desarrollo de cualquier
-                proyecto</p>
-        </li>
-        <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="text-3xl mb-4">💸</div>
-            <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Gratis</h3>
-            <p class="text-gray-600">Análisis sin registro ni pagos</p>
-        </li>
-        <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="text-3xl mb-4">⚙️</div>
-            <h3 class="font-bold text-lg mb-2 text-[#2A004E]">Transparente y libre</h3>
-            <p class="text-gray-600">Código fuente disponible, modifica y mejora</p>
-        </li>
+        {features.map((feature) => (
+                <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="text-3xl mb-4">{feature.emoji}</div>
+                    <h3 class="font-bold text-lg mb-2 text-[#2A004E]">{feature.title}</h3>
+                    <p class="text-gray-600">{feature.description}</p>
+                    <div class={`h-2 w-0 group-hover:w-full transition-all duration-300 bg-gradient-to-r ${feature.color} mt-4 rounded-full`}></div>
+                </li>
+        ))}
     </ul>
 </section>
