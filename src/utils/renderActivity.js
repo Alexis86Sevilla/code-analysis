@@ -1,5 +1,11 @@
 export function renderActivity(data) {
-  if (!data || !Array.isArray(data) || data.length === 0) return;
+  if (!data || !Array.isArray(data) || data.length === 0) {
+    const container = document.getElementById("activity-container");
+    container.innerHTML = "No hay datos para mostrar";
+    container.className =
+      "text-[#F14A00] text-center text-2xl py-20 border-2 border-[#F14A00]/20 rounded-xl mb-32";
+    return;
+  }
   let monthsData = {};
   for (let week of data) {
     const month = formatDate(new Date(week.week * 1000));
@@ -16,12 +22,9 @@ export function renderActivity(data) {
   const results = Object.entries(monthsData).sort(
     (a, b) => a[1].monthNumber - b[1].monthNumber,
   );
-  console.warn(results);
 
   const dateAxis = results.map((e) => e[0]);
   const totalCommits = results.map((e) => e[1].commits);
-  console.warn("dateAxis", dateAxis);
-  console.warn("totalCommits", totalCommits);
   const canvas = document.getElementById("activity-chart");
   const ctx = canvas.getContext("2d");
 

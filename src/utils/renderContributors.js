@@ -1,5 +1,13 @@
 export function renderContributors(data) {
-  if (!data || !Array.isArray(data) || data.length === 0) return;
+  if (!data || !Array.isArray(data) || data.length === 0) {
+    const container = document.getElementById("contributors-container");
+    const containerList = document.getElementById("contributors-list");
+    containerList.textContent = "";
+    container.innerHTML = "No hay datos para mostrar";
+    container.className =
+      "text-[#F14A00] text-center text-2xl py-20 border-2 border-[#F14A00]/20 rounded-xl";
+    return;
+  }
   const container = document.getElementById("contributors-list");
   if (container) container.innerHTML = "";
   const results = [...data].sort((a, b) => b.contributions - a.contributions);
