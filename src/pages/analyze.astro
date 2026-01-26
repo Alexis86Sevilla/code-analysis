@@ -3,36 +3,69 @@ import Layout from "../layouts/Layout.astro";
 import Form from "./sections/analyze/form.astro";
 import TabsContainer from "./sections/analyze/tabs/tabsContainer.astro";
 ---
+
 <Layout>
-    <div class="flex flex-col items-center bg-gradient-to-br from-[#2A004E] via-[#500073] to-[#2A004E] min-h-screen">
-        <h1 class="text-white text-center text-5xl mt-20 mb-10 font-extrabold">Analiza tu repositorio de GitHub</h1>
-        <p class="text-gray-300 text-xl mb-20">Obtén métricas y estadísticas al instante</p>
+  <div
+    class="flex flex-col items-center bg-gradient-to-br from-[#2A004E] via-[#500073] to-[#2A004E] min-h-screen"
+  >
+    <h1 class="text-white text-center text-5xl mt-20 mb-10 font-extrabold">
+      Analiza tu repositorio de GitHub
+    </h1>
+    <p class="text-gray-300 text-xl mb-20">
+      Obtén métricas y estadísticas al instante
+    </p>
 
-        <Form/>
+    <Form />
+    <TabsContainer />
 
-        <TabsContainer/>
+    <div
+      id="loading-spinner"
+      class="hidden flex flex-col items-center justify-center py-20"
+    >
+      <div class="relative w-20 h-20">
+        <div class="absolute inset-0 border-4 border-[#F14A00]/20 rounded-full">
+        </div>
+        <div
+          class="absolute inset-0 border-4 border-t-[#F14A00] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"
+        >
+        </div>
+      </div>
+      <p class="text-white mt-4 font-medium animate-pulse">
+        Consultando a GitHub...
+      </p>
     </div>
+  </div>
 
-    <script>
-        import {renderOverview} from '../utils/renderOverview.js';
-        import {renderLanguages} from '../utils/renderLanguages.js';
-        import {getFormDataAndFetch} from '../utils/fetchData.js'
-        import {renderContributors} from '../utils/renderContributors.js'
-        import {renderActivity} from '../utils/renderActivity.js'
+  <script>
+    import { getFormDataAndFetch } from "../utils/fetchData.js";
+    import { renderActivity } from "../utils/renderActivity.js";
+    import { renderContributors } from "../utils/renderContributors.js";
+    import { renderLanguages } from "../utils/renderLanguages.js";
+    import { renderOverview } from "../utils/renderOverview.js";
 
-        const form = document.getElementById('formData');
-        const tabsContainer = document.getElementById('tabs-container');
+    const form = document.getElementById("formData");
+    const tabsContainer = document.getElementById("tabs-container");
+    const spinner = document.getElementById("loading-spinner");
 
-        if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault()
-                const data = await getFormDataAndFetch(form);
-                renderOverview(data.overviewResponse);
-                renderLanguages(data.languagesResponse);
-                renderContributors(data.contributorsResponse);
-                renderActivity(data.commitActivityResponse);
-                tabsContainer!.classList.remove('hidden');
-            });
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        tabsContainer!.classList.add("hidden");
+        spinner?.classList.remove("hidden");
+
+        try {
+          const data = await getFormDataAndFetch(form);
+          renderOverview(data.overviewResponse);
+          renderLanguages(data.languagesResponse);
+          renderContributors(data.contributorsResponse);
+          renderActivity(data.commitActivityResponse);
+          spinner?.classList.add("hidden");
+          tabsContainer!.classList.remove("hidden");
+        } catch (err) {
+          spinner?.classList.add("hidden");
+          console.error("Error al obtener datos:", err);
         }
-    </script>
+      });
+    }
+  </script>
 </Layout>
