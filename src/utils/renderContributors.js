@@ -1,124 +1,139 @@
 export function renderContributors(data) {
-    const results = data.sort((a, b) => b.contributions - a.contributions);
+  if (!data) return;
+  const container = document.getElementById("contributors-list");
+  if (container) container.innerHTML = "";
+  const results = [...data].sort((a, b) => b.contributions - a.contributions);
+  const top5 = results.slice(0, 5);
 
-    const top5 = results.slice(0, 5);
+  const names = top5.map((e) => e.login);
+  const contributions = top5.map((e) => e.contributions);
 
-    const names = top5.map((e) => e.login);
-    const contributions = top5.map((e) => e.contributions);
-    const canvas = document.getElementById('contributors-chart');
-    const ctx = canvas.getContext('2d');
+  const canvas = document.getElementById("contributors-chart");
+  const ctx = canvas.getContext("2d");
 
-    createChart(names, contributions, ctx);
-    renderAvatarsWithLinks(top5);
+  createChart(names, contributions, ctx);
+  renderAvatarsWithLinks(top5);
 }
 
 function createChart(names, contributions, ctx) {
-    if (window.contributors) {
-        window.contributors.destroy();
-    }
+  if (window.contributors) {
+    window.contributors.destroy();
+  }
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: names,
-            datasets: [{
-                label: 'Cantidad contribuciones',
-                data: contributions,
-                backgroundColor: function(context) {
-                    const chart = context.chart;
-                    const {ctx, chartArea} = chart;
+  window.contributors = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: names,
+      datasets: [
+        {
+          label: "Cantidad contribuciones",
+          data: contributions,
+          backgroundColor: function (context) {
+            const chart = context.chart;
+            const { ctx, chartArea } = chart;
 
-                    if (!chartArea) return null;
+            if (!chartArea) return null;
 
-                    const colors = [
-                        ['#FF6B35', '#9D4EDD'],
-                        ['#06FFA5', '#4361EE'],
-                        ['#FFD60A', '#FF006E'],
-                        ['#F72585', '#4CC9F0'],
-                        ['#52B788', '#FCA311'],
-                    ];
+            const colors = [
+              ["#FF6B35", "#9D4EDD"],
+              ["#06FFA5", "#4361EE"],
+              ["#FFD60A", "#FF006E"],
+              ["#F72585", "#4CC9F0"],
+              ["#52B788", "#FCA311"],
+            ];
 
-                    const index = context.dataIndex;
-                    const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+            const index = context.dataIndex;
+            const gradient = ctx.createLinearGradient(
+              0,
+              chartArea.bottom,
+              0,
+              chartArea.top,
+            );
 
-                    gradient.addColorStop(0, colors[index][0]);
-                    gradient.addColorStop(1, colors[index][1]);
+            gradient.addColorStop(0, colors[index][0]);
+            gradient.addColorStop(1, colors[index][1]);
 
-                    return gradient;
-                },
-                borderColor: 'rgba(255, 255, 255, 0.3)',
-                borderWidth: 2,
-                borderRadius: 12,
-                borderSkipped: false,
-                hoverOffset: 15,
-                hoverBorderColor: '#FFFFFF',
-                hoverBorderWidth: 3
-            }]
+            return gradient;
+          },
+          borderColor: "rgba(255, 255, 255, 0.3)",
+          borderWidth: 2,
+          borderRadius: 12,
+          borderSkipped: false,
+          hoverOffset: 15,
+          hoverBorderColor: "#FFFFFF",
+          hoverBorderWidth: 3,
         },
-        options: {
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#FFFFFF',
-                        font: {
-                            size: 12
-                        }
-                    },
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.05)',
-                        drawBorder: false
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: '#FFFFFF',
-                        font: {
-                            size: 13
-                        }
-                    },
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.05)',
-                        drawBorder: false
-                    }
-                }
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          ticks: {
+            color: "#FFFFFF",
+            font: {
+              size: 12,
             },
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: {
-                padding: {
-                    top: 10,
-                    bottom: 10,
-                    left: 0,
-                    right: 0
-                }
+          },
+          grid: {
+            color: "rgba(255, 255, 255, 0.05)",
+            drawBorder: false,
+          },
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: "#FFFFFF",
+            font: {
+              size: 13,
             },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(0,0,0,0.87)',
-                    titleColor: '#FFFFFF',
-                    bodyColor: '#FFFFFF',
-                    borderColor: '#F14A00',
-                    borderWidth: 2,
-                    padding: 12,
-                    callbacks: {
-                        label: function (context) {
-                            return context.label + ': ' + context.parsed.y + ' contribuciones';
-                        }
-                    }
-                }
-            }
-        }
-    });
+          },
+          grid: {
+            color: "rgba(255, 255, 255, 0.05)",
+            drawBorder: false,
+          },
+        },
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 10,
+          bottom: 10,
+          left: 0,
+          right: 0,
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          backgroundColor: "rgba(0,0,0,0.87)",
+          titleColor: "#FFFFFF",
+          bodyColor: "#FFFFFF",
+          borderColor: "#F14A00",
+          borderWidth: 2,
+          padding: 12,
+          callbacks: {
+            label: function (context) {
+              return (
+                context.label + ": " + context.parsed.y + " contribuciones"
+              );
+            },
+          },
+        },
+      },
+    },
+  });
 }
 
 function renderAvatarsWithLinks(top5) {
-    const container = document.getElementById('contributors-list');
-
-    const html = top5.map((contributor, index) => `
+  const container = document.getElementById("contributors-list");
+  if (!container) return;
+  container.textContent = "";
+  const html = top5
+    .map(
+      (contributor, index) => `
         <a href="${contributor.url}" 
            target="_blank" 
            rel="noopener noreferrer"
@@ -138,10 +153,12 @@ function renderAvatarsWithLinks(top5) {
             </p>
             
             <span class="text-gray-300 text-sm font-medium">
-                ${contributor.contributions.toLocaleString('es-ES')} commits
+                ${contributor.contributions.toLocaleString("es-ES")} commits
             </span>
         </a>
-    `).join('');
+    `,
+    )
+    .join("");
 
-    container.innerHTML = html;
+  container.innerHTML = html;
 }
