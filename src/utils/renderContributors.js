@@ -1,3 +1,5 @@
+import { processContributorsData } from "./dataProcessors.js";
+
 export function renderContributors(data) {
   if (!data || !Array.isArray(data) || data.length === 0) {
     const container = document.getElementById("contributors-container");
@@ -10,11 +12,8 @@ export function renderContributors(data) {
   }
   const container = document.getElementById("contributors-list");
   if (container) container.innerHTML = "";
-  const results = [...data].sort((a, b) => b.contributions - a.contributions);
-  const top5 = results.slice(0, 5);
-
-  const names = top5.map((e) => e.login);
-  const contributions = top5.map((e) => e.contributions);
+  
+  const { names, contributions, top5 } = processContributorsData(data);
 
   const canvas = document.getElementById("contributors-chart");
   const ctx = canvas.getContext("2d");

@@ -1,3 +1,5 @@
+import { fetchWithHeaders } from "../../utils/httpClient.js";
+
 export const prerender = false;
 
 export async function POST(request) {
@@ -8,31 +10,24 @@ export async function POST(request) {
 
     const baseUrl = `https://api.github.com/repos/${user}/${repository}`;
 
-    const fetchOptions = {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        "User-Agent": "Astro-Code-Analyzer-App",
-      },
-    };
-
     const [response1, response2, response3, response4] =
       await Promise.allSettled([
-        fetch(baseUrl, fetchOptions),
-        fetch(baseUrl + "/languages", fetchOptions),
-        fetch(baseUrl + "/contributors", fetchOptions),
-        fetch(baseUrl + "/stats/commit_activity", fetchOptions),
+        fetchWithHeaders(baseUrl),
+        fetchWithHeaders(baseUrl + "/languages"),
+        fetchWithHeaders(baseUrl + "/contributors"),
+        fetchWithHeaders(baseUrl + "/stats/commit_activity"),
       ]);
 
-    const overviewResponse = returnStatusFulfilled(response1)
+    const overviewResponse = returnStatusFulfilled(response1) && response1.value.ok
       ? await response1.value.json()
       : null;
-    const languagesResponse = returnStatusFulfilled(response2)
+    const languagesResponse = returnStatusFulfilled(response2) && response2.value.ok
       ? await response2.value.json()
       : null;
-    const contributorsResponse = returnStatusFulfilled(response3)
+    const contributorsResponse = returnStatusFulfilled(response3) && response3.value.ok
       ? await response3.value.json()
       : null;
-    const commitActivityResponse = returnStatusFulfilled(response4)
+    const commitActivityResponse = returnStatusFulfilled(response4) && response4.value.ok
       ? await response4.value.json()
       : null;
 
@@ -49,7 +44,7 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error("Error al llamar a la API de GitHub:", error);
-    return new Response(JSON.stringify({ error }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }
 

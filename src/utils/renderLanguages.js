@@ -1,23 +1,13 @@
+import { processLanguageData } from "./dataProcessors.js";
+
 export function renderLanguages(data) {
   if (!data) return;
 
-  const results = Object.entries(data).sort((a, b) => b[1] - a[1]);
-
-  const top10 = results.slice(0, 10);
-  const others = results.slice(10);
-
-  const totalOthers = others.reduce((suma, [key, value]) => suma + value, 0);
-  const totalBytes = results.reduce((suma, [key, value]) => suma + value, 0);
-
-  const names = top10.map(([key, value]) => key);
-  const percentages = top10.map(([key, value]) => (value / totalBytes) * 100);
-  const percentagesOthers = (totalOthers / totalBytes) * 100;
-  const totalDataNames = [...names, "Otros"];
-  const totalDataPercentages = [...percentages, percentagesOthers];
+  const { names, percentages } = processLanguageData(data);
   const canvas = document.getElementById("languages-chart");
   const ctx = canvas.getContext("2d");
 
-  createChart(totalDataNames, totalDataPercentages, ctx);
+  createChart(names, percentages, ctx);
 }
 
 function createChart(names, percentages, ctx) {

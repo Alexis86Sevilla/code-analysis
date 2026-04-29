@@ -1,3 +1,5 @@
+import { processActivityData } from "./dataProcessors.js";
+
 export function renderActivity(data) {
   if (!data || !Array.isArray(data) || data.length === 0) {
     const container = document.getElementById("activity-container");
@@ -6,37 +8,13 @@ export function renderActivity(data) {
       "text-[#F14A00] text-center text-2xl py-20 border-2 border-[#F14A00]/20 rounded-xl mb-32";
     return;
   }
-  let monthsData = {};
-  for (let week of data) {
-    const month = formatDate(new Date(week.week * 1000));
-    const monthNumber = new Date(week.week * 1000).getMonth();
-    const commits = week.total;
-
-    if (monthsData[month]) {
-      monthsData[month].commits += commits;
-    } else {
-      monthsData[month] = { commits: commits, monthNumber: monthNumber };
-    }
-  }
-
-  const results = Object.entries(monthsData).sort(
-    (a, b) => a[1].monthNumber - b[1].monthNumber,
-  );
-
-  const dateAxis = results.map((e) => e[0]);
-  const totalCommits = results.map((e) => e[1].commits);
+  
+  const { dateAxis, totalCommits } = processActivityData(data);
+  
   const canvas = document.getElementById("activity-chart");
   const ctx = canvas.getContext("2d");
 
   createChart(dateAxis, totalCommits, ctx);
-}
-
-function formatDate(input) {
-  const d = input instanceof Date ? input : new Date(input);
-  if (Number.isNaN(d.getTime())) return "";
-  return d
-    .toLocaleDateString("es-ES", { month: "short" })
-    .replace(/\sde\s/g, " ");
 }
 
 function createChart(labels, commits, ctx) {

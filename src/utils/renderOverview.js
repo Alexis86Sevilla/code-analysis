@@ -1,3 +1,5 @@
+import { formatDate } from "./formatters.js";
+
 export function renderOverview(data) {
   if (!data) return;
   const listSummary = [
@@ -19,16 +21,4 @@ export function renderOverview(data) {
     }
     if (el) el.textContent = value || "-";
   });
-}
-
-function formatDate(input) {
-  const d = input instanceof Date ? input : new Date(input);
-  if (Number.isNaN(d.getTime())) return "";
-  return d
-    .toLocaleDateString("es-ES", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })
-    .replace(/\sde\s/g, " ");
 }
