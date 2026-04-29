@@ -13,35 +13,3 @@ import Faq from "../sections/home/Faq.astro";
   <Faq />
 </Layout>
 
-<script>
-  const faqItems = document.querySelectorAll(".faq-item");
-  const faqAnswers = document.querySelectorAll(".faq-answer");
-  const allChevrons = document.querySelectorAll(".faq-item svg");
-
-  faqItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      const wasOpen = !item
-        .querySelector(".faq-answer")!
-        .classList.contains("hidden");
-
-      faqAnswers.forEach((answer) => {
-        answer.classList.add("hidden");
-      });
-
-      allChevrons.forEach((chevron) => {
-        chevron!.classList.remove("rotate-180");
-      });
-
-      const clickedItem = item.querySelector(".faq-answer");
-      if (!wasOpen) {
-        clickedItem!.classList.remove("hidden");
-        item
-          .querySelector("svg")!
-          .classList.add("transition-all", "rotate-180");
-      } else {
-        clickedItem!.classList.add("hidden");
-        item.querySelector("svg")!.classList.remove("rotate-180");
-      }
-    });
-  });
-</script>
