@@ -8,9 +8,9 @@ export function renderActivity(data) {
       "text-[#F14A00] text-center text-2xl py-20 border-2 border-[#F14A00]/20 rounded-xl mb-32";
     return;
   }
-  
+
   const { dateAxis, totalCommits } = processActivityData(data);
-  
+
   const canvas = document.getElementById("activity-chart");
   const ctx = canvas.getContext("2d");
 
@@ -47,12 +47,12 @@ function createChart(labels, commits, ctx) {
           ticks: {
             color: "#FFFFFF",
             font: {
-              size: window.innerWidth < 768 ? 9 : 14, // Más pequeño en móvil
+              size: window.innerWidth < 768 ? 9 : 14,
             },
             maxRotation: 45,
-            minRotation: 0, // En desktop puede ser horizontal
-            autoSkip: true, // ← CAMBIADO: Deja que Chart.js decida
-            maxTicksLimit: window.innerWidth < 768 ? 6 : 14, // Menos etiquetas en móvil
+            minRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: window.innerWidth < 768 ? 6 : 14,
           },
           grid: {
             color: "rgba(255, 255, 255, 0.05)",

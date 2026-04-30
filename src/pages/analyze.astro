@@ -7,80 +7,105 @@ import TabsContainer from "../sections/analyze/tabs/tabsContainer.astro";
 <Layout>
   <main class="min-h-screen bg-slate-950 px-6 py-12">
     <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Analiza tu repositorio</h1>
-            <p class="text-slate-400 text-lg">Introduce la URL para obtener métricas al instante.</p>
-        </div>
-
-    <Form />
-    
-    <div class="mt-12">
-        <TabsContainer />
-    </div>
-
-    <div
-      id="loading-spinner"
-      class="hidden flex flex-col items-center justify-center py-20"
-    >
-      <div class="relative w-16 h-16">
-        <div class="absolute inset-0 border-4 border-[#F14A00]/10 rounded-full">
-        </div>
-        <div
-          class="absolute inset-0 border-4 border-t-[#F14A00] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"
+      <div class="text-center mb-16">
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight"
         >
-        </div>
-      </div>
-      <p class="text-slate-300 mt-6 font-medium animate-pulse">
-        Consultando a GitHub...
-      </p>
-    </div>
-
-    <div id="error-message" class="hidden text-center py-10">
-        <p class="text-red-400 font-semibold bg-red-900/20 px-6 py-4 rounded-xl border border-red-800/50">
-            Hubo un error al obtener los datos. Por favor, verifica el usuario/repositorio o intenta más tarde.
+          Analiza tu repositorio
+        </h1>
+        <p class="text-slate-400 text-lg">
+          Introduce los datos del repo para obtener métricas al instante.
         </p>
+      </div>
+
+      <Form />
+
+      <div class="mt-12">
+        <TabsContainer />
+      </div>
+
+      <div
+        id="loading-spinner"
+        class="hidden flex flex-col items-center justify-center py-20"
+      >
+        <div class="relative w-16 h-16">
+          <div
+            class="absolute inset-0 border-4 border-[#F14A00]/10 rounded-full"
+          >
+          </div>
+          <div
+            class="absolute inset-0 border-4 border-t-[#F14A00] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"
+          >
+          </div>
+        </div>
+        <p class="text-slate-300 mt-6 font-medium animate-pulse">
+          Consultando a GitHub...
+        </p>
+      </div>
+
+      <div id="error-message" class="hidden text-center py-10">
+        <p
+          class="text-red-400 font-semibold bg-red-900/20 px-6 py-4 rounded-xl border border-red-800/50"
+        >
+        </p>
+      </div>
     </div>
-  </main>
 
-  <script>
-    import { getFormDataAndFetch } from "../utils/fetchData.js";
-    import { renderActivity } from "../utils/renderActivity.js";
-    import { renderContributors } from "../utils/renderContributors.js";
-    import { renderLanguages } from "../utils/renderLanguages.js";
-    import { renderOverview } from "../utils/renderOverview.js";
+    <script>
+      import { getFormDataAndFetch } from "../utils/fetchData.js";
+      import { renderActivity } from "../utils/renderActivity.js";
+      import { renderContributors } from "../utils/renderContributors.js";
+      import { renderLanguages } from "../utils/renderLanguages.js";
+      import { renderOverview } from "../utils/renderOverview.js";
 
-    const form = document.getElementById("formData");
-    const tabsContainer = document.getElementById("tabs-container");
-    const spinner = document.getElementById("loading-spinner");
-    const errorMessage = document.getElementById("error-message");
+      const form = document.getElementById("formData") as HTMLFormElement;
+      const submitButton = document.getElementById(
+        "submit-button",
+      ) as HTMLButtonElement;
+      const buttonText = document.getElementById("button-text")!;
+      const tabsContainer = document.getElementById("tabs-container");
+      const spinner = document.getElementById("loading-spinner");
+      const errorMessage = document.getElementById("error-message");
+      const errorText = errorMessage?.querySelector("p");
 
-    if (form) {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        tabsContainer!.classList.add("hidden");
-        errorMessage!.classList.add("hidden");
-        spinner?.classList.remove("hidden");
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-        try {
-          const data = await getFormDataAndFetch(form);
-          
-          if (data.error) {
+          // UI State: Loading
+          tabsContainer!.classList.add("hidden");
+          errorMessage!.classList.add("hidden");
+          spinner?.classList.remove("hidden");
+          submitButton.disabled = true;
+          buttonText.textContent = "Analizando...";
+
+          try {
+            const data = await getFormDataAndFetch(form);
+
+            if (data.error) {
               throw new Error(data.error);
-          }
+            }
 
-          renderOverview(data.overviewResponse);
-          renderLanguages(data.languagesResponse);
-          renderContributors(data.contributorsResponse);
-          renderActivity(data.commitActivityResponse);
-          
-          spinner?.classList.add("hidden");
-          tabsContainer!.classList.remove("hidden");
-        } catch (err) {
-          spinner?.classList.add("hidden");
-          errorMessage?.classList.remove("hidden");
-          console.error("Error al obtener datos:", err);
-        }
-      });
-    }
-  </script>
+            renderOverview(data.overviewResponse);
+            renderLanguages(data.languagesResponse);
+            renderContributors(data.contributorsResponse);
+            renderActivity(data.commitActivityResponse);
+
+            tabsContainer!.classList.remove("hidden");
+          } catch (err: any) {
+            errorMessage?.classList.remove("hidden");
+            if (errorText)
+              errorText.textContent =
+                err.message || "Hubo un error al obtener los datos.";
+            console.error("Error al obtener datos:", err);
+          } finally {
+            // UI State: Reset
+            spinner?.classList.add("hidden");
+            submitButton.disabled = false;
+            buttonText.textContent = "Analizar Repositorio";
+          }
+        });
+      }
+    </script>
+  </main>
 </Layout>
