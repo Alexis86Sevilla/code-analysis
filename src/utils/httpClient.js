@@ -1,7 +1,9 @@
 export async function fetchWithHeaders(url, options = {}) {
+  const token = import.meta.env.GITHUB_TOKEN;
   const defaultHeaders = {
     'Accept': 'application/vnd.github.v3+json',
     'User-Agent': 'Astro-Code-Analyzer-App',
+    ...(token ? { 'Authorization': `token ${token}` } : {}),
   };
 
   const finalOptions = {
