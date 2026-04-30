@@ -4,62 +4,73 @@ import Languages from "./languages.astro";
 import Contributors from "./contributors.astro";
 import Activity from "./activity.astro";
 
-// Estilo minimalista puro
-const buttonClass = 'tab-button px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 text-slate-400 hover:text-slate-200';
-// Activo: sólido, sin bordes decorativos
-const activeClass = 'bg-[#F14A00] text-white';
+const buttonClass =
+  "tab-button cursor-pointer px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 text-slate-400 hover:text-slate-200";
+const activeClass = "bg-[#F14A00] text-white";
 ---
 
 <div id="tabs-container" class="hidden">
-    <div class="tabs-navigation flex flex-wrap justify-center gap-1 p-1 bg-slate-950 rounded-full border border-slate-800 w-full sm:w-fit mx-auto mt-10">
-        <button id="general-button" class={`${buttonClass} ${activeClass}`} data-tab="overview-tab">
-            General
-        </button>
-        <button id="languages-button" class={buttonClass} data-tab="languages-tab">
-            Lenguajes
-        </button>
-        <button id="contributors-button" class={buttonClass} data-tab="contributors-tab">
-            Contribuciones
-        </button>
-        <button id="activity-button" class={buttonClass} data-tab="activity-tab">
-            Actividad
-        </button>
-    </div>
-    <div class="mt-8">
-        <Overview class="tab-content overview-tab"/>
-        <Languages class="tab-content languages-tab"/>
-        <Contributors class="tab-content contributors-tab"/>
-        <Activity class="tab-content activity-tab"/>
-    </div>
+  <div
+    class="tabs-navigation flex flex-wrap justify-center gap-1 p-1 bg-slate-950 rounded-full border border-slate-800 w-full sm:w-fit mx-auto mt-10"
+  >
+    <button
+      id="general-button"
+      class={`${buttonClass} ${activeClass}`}
+      data-tab="overview-tab"
+    >
+      General
+    </button>
+    <button id="languages-button" class={buttonClass} data-tab="languages-tab">
+      Lenguajes
+    </button>
+    <button
+      id="contributors-button"
+      class={buttonClass}
+      data-tab="contributors-tab"
+    >
+      Contribuciones
+    </button>
+    <button id="activity-button" class={buttonClass} data-tab="activity-tab">
+      Actividad
+    </button>
+  </div>
+  <div class="mt-8">
+    <Overview class="tab-content overview-tab" />
+    <Languages class="tab-content languages-tab" />
+    <Contributors class="tab-content contributors-tab" />
+    <Activity class="tab-content activity-tab" />
+  </div>
 </div>
 
 <script>
-    const tabs = document.querySelectorAll('.tab-content');
-    const buttons = document.querySelectorAll('.tab-button');
-    const activeClass = 'bg-[#F14A00]';
-    const activeText = 'text-white';
-    const inactiveText = 'text-slate-400';
+  const tabs = document.querySelectorAll(".tab-content");
+  const buttons = document.querySelectorAll(".tab-button");
+  const activeClass = "bg-[#F14A00]";
+  const activeText = "text-white";
+  const inactiveText = "text-slate-400";
 
-    tabs.forEach((tab, index) => {
-        tab.style.display = index === 0 ? 'block' : 'none';
-    });
+  tabs.forEach((tab, index) => {
+    tab.style.display = index === 0 ? "block" : "none";
+  });
 
-    document.querySelector('.tabs-navigation')!.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        if (target && target.tagName === 'BUTTON') {
-            const tabToShow = target.dataset!.tab;
+  document.querySelector(".tabs-navigation")!.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (target && target.tagName === "BUTTON") {
+      const tabToShow = target.dataset!.tab;
 
-            tabs.forEach(tab => {
-                tab.style.display = tab.classList.contains(tabToShow!) ? 'block' : 'none';
-            });
+      tabs.forEach((tab) => {
+        tab.style.display = tab.classList.contains(tabToShow!)
+          ? "block"
+          : "none";
+      });
 
-            buttons.forEach(btn => {
-                btn.classList.remove(activeClass, activeText);
-                btn.classList.add(inactiveText);
-            });
+      buttons.forEach((btn) => {
+        btn.classList.remove(activeClass, activeText);
+        btn.classList.add(inactiveText);
+      });
 
-            target.classList.add(activeClass, activeText);
-            target.classList.remove(inactiveText);
-        }
-    });
+      target.classList.add(activeClass, activeText);
+      target.classList.remove(inactiveText);
+    }
+  });
 </script>
