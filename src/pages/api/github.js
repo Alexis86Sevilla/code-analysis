@@ -21,15 +21,20 @@ export async function POST(request) {
     const overviewResponse = returnStatusFulfilled(response1) && response1.value.ok
       ? await response1.value.json()
       : null;
+
+    if (!overviewResponse) {
+      return new Response(JSON.stringify({ error: "Repositorio no encontrado o límite de API excedido" }), { status: 404 });
+    }
+
     const languagesResponse = returnStatusFulfilled(response2) && response2.value.ok
       ? await response2.value.json()
-      : null;
+      : {};
     const contributorsResponse = returnStatusFulfilled(response3) && response3.value.ok
       ? await response3.value.json()
-      : null;
+      : [];
     const commitActivityResponse = returnStatusFulfilled(response4) && response4.value.ok
       ? await response4.value.json()
-      : null;
+      : [];
 
     const data = {
       overviewResponse,
