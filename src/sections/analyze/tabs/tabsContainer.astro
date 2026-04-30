@@ -3,66 +3,63 @@ import Overview from "./overview.astro";
 import Languages from "./languages.astro";
 import Contributors from "./contributors.astro";
 import Activity from "./activity.astro";
-const buttonClass = 'cursor-pointer tab-button px-8 py-3 text-lg font-semibold rounded-full transition-all duration-300 bg-white/10 text-white border-2 border-white/20 hover:bg-gradient-to-r hover:from-[#F14A00] hover:to-[#C62300] hover:border-transparent hover:scale-105 hover:shadow-lg hover:shadow-[#F14A00]/50'
+
+// Estilo minimalista puro
+const buttonClass = 'tab-button px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 text-slate-400 hover:text-slate-200';
+// Activo: sólido, sin bordes decorativos
+const activeClass = 'bg-[#F14A00] text-white';
 ---
+
 <div id="tabs-container" class="hidden">
-    <div class="tabs-navigation flex justify-center gap-4 mt-10 flex-wrap px-4">
-        <button
-                id="general-button"
-                class={buttonClass}
-                data-tab="overview-tab">
+    <div class="tabs-navigation flex flex-wrap justify-center gap-1 p-1 bg-slate-950 rounded-full border border-slate-800 w-full sm:w-fit mx-auto mt-10">
+        <button id="general-button" class={`${buttonClass} ${activeClass}`} data-tab="overview-tab">
             General
         </button>
-        <button
-                id="languages-button"
-                class={buttonClass}
-                data-tab="languages-tab">
+        <button id="languages-button" class={buttonClass} data-tab="languages-tab">
             Lenguajes
         </button>
-        <button
-                id="contributors-button"
-                class={buttonClass}
-                data-tab="contributors-tab">
+        <button id="contributors-button" class={buttonClass} data-tab="contributors-tab">
             Contribuciones
         </button>
-        <button
-                id="activity-button"
-                class={buttonClass}
-                data-tab="activity-tab">
+        <button id="activity-button" class={buttonClass} data-tab="activity-tab">
             Actividad
         </button>
     </div>
-    <Overview class="tab-content overview-tab"/>
-    <Languages class="tab-content languages-tab"/>
-    <Contributors class="tab-content contributors-tab"/>
-    <Activity class="tab-content activity-tab"/>
+    <div class="mt-8">
+        <Overview class="tab-content overview-tab"/>
+        <Languages class="tab-content languages-tab"/>
+        <Contributors class="tab-content contributors-tab"/>
+        <Activity class="tab-content activity-tab"/>
+    </div>
 </div>
+
 <script>
     const tabs = document.querySelectorAll('.tab-content');
     const buttons = document.querySelectorAll('.tab-button');
+    const activeClass = 'bg-[#F14A00]';
+    const activeText = 'text-white';
+    const inactiveText = 'text-slate-400';
 
     tabs.forEach((tab, index) => {
         tab.style.display = index === 0 ? 'block' : 'none';
     });
 
-    buttons[0].classList.add('bg-gradient-to-r', 'from-[#F14A00]', 'to-[#C62300]', 'border-transparent', 'shadow-lg');
-    buttons[0].classList.remove('bg-white/10', 'border-white/20');
-
     document.querySelector('.tabs-navigation')!.addEventListener('click', (e) => {
-        if (e.target && e.target.tagName === 'BUTTON') {
-            const tabToShow = e.target.dataset!.tab;
+        const target = e.target as HTMLElement;
+        if (target && target.tagName === 'BUTTON') {
+            const tabToShow = target.dataset!.tab;
 
             tabs.forEach(tab => {
-                tab.style.display = tab.classList.contains(tabToShow) ? 'block' : 'none';
+                tab.style.display = tab.classList.contains(tabToShow!) ? 'block' : 'none';
             });
 
             buttons.forEach(btn => {
-                btn.classList.remove('bg-gradient-to-r', 'from-[#F14A00]', 'to-[#C62300]', 'border-transparent', 'shadow-lg');
-                btn.classList.add('bg-white/10', 'border-white/20');
+                btn.classList.remove(activeClass, activeText);
+                btn.classList.add(inactiveText);
             });
 
-            e.target.classList.add('bg-gradient-to-r', 'from-[#F14A00]', 'to-[#C62300]', 'border-transparent', 'shadow-lg');
-            e.target.classList.remove('bg-white/10', 'border-white/20');
+            target.classList.add(activeClass, activeText);
+            target.classList.remove(inactiveText);
         }
     });
 </script>

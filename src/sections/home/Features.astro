@@ -1,40 +1,71 @@
 ---
 const features = [
-    {
-        emoji: "🚀",
-        title: "Análisis automático",
-        description: "Conecta tu repo de GitHub y obtén métricas en segundos",
-        color: "from-blue-500 to-cyan-500"
-    },
-    {
-        emoji: "📈",
-        title: "Análisis visual completo",
-        description: "Descubre el stack tecnológico, equipo y ritmo de desarrollo",
-        color: "from-purple-500 to-pink-500"
-    },
-    {
-        emoji: "💸",
-        title: "Gratis",
-        description: "Análisis sin registro ni pagos",
-        color: "from-green-500 to-emerald-300"
-    },
-    {
-        emoji: "⚙️",
-        title: "Transparente y libre",
-        description: "Código fuente disponible, modifica y mejora",
-        color: "from-orange-500 to-red-300"
-    }
+  {
+    title: "Overview",
+    description:
+      "El estado del arte: estrellas, forks y los datos clave del repo.",
+    class: "md:col-span-2",
+    icon: '<svg class="w-8 h-8 text-[#F14A00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>',
+  },
+  {
+    title: "Lenguajes",
+    description:
+      "Gráficos detallados de cómo se reparte el código del proyecto.",
+    class: "md:col-span-1",
+    icon: '<svg class="w-8 h-8 text-[#F14A00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>',
+  },
+  {
+    title: "Actividad",
+    description:
+      "Mira el ritmo del proyecto con un historial claro de commits.",
+    class: "md:col-span-1",
+    icon: '<svg class="w-8 h-8 text-[#F14A00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>',
+  },
+  {
+    title: "Colaboradores",
+    description: "Descubre quiénes están detrás de las contribuciones.",
+    class: "md:col-span-2",
+    icon: '<svg class="w-8 h-8 text-[#F14A00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>',
+  },
 ];
 ---
-<section class="py-16 bg-gray-100 flex items-center justify-center">
-    <ul class="text-center max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
-        {features.map((feature) => (
-                <li class="p-6 mx-4 sm:mx-0 cursor-default select-none bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
-                    <div class="text-3xl mb-4">{feature.emoji}</div>
-                    <h3 class="font-bold text-lg mb-2 text-[#2A004E]">{feature.title}</h3>
-                    <p class="text-gray-600">{feature.description}</p>
-                    <div class={`h-2 w-0 group-hover:w-full transition-all duration-300 bg-gradient-to-r ${feature.color} mt-4 rounded-full`}></div>
-                </li>
-        ))}
-    </ul>
+
+<section class="py-20 bg-slate-950">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {
+        features.map((feature) => (
+          <div
+            class={`p-8 border border-white/5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-800/50 backdrop-blur-sm transition-all duration-300 hover:border-[#F14A00]/50 hover:shadow-2xl hover:shadow-[#F14A00]/10 ${feature.class}`}
+          >
+            <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-[#F14A00]/10 mb-6">
+              <Fragment
+                set:html={feature.icon.replace(
+                  "text-[#F14A00]",
+                  "text-[#F14A00]",
+                )}
+              />
+            </div>
+            <h3 class="font-bold text-xl mb-3 text-white tracking-tight">
+              {feature.title}
+            </h3>
+            <p class="text-slate-400 leading-relaxed text-sm">
+              {feature.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </section>
+
+<style>
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  .hover\:border-white\/10:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+</style>

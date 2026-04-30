@@ -3,17 +3,13 @@ const { class: className } = Astro.props;
 ---
 
 <div class={className + " w-full"}>
-  <h2 class="text-white text-center text-5xl mt-20 mb-16 font-extrabold">
-    <span
-      class="bg-gradient-to-r from-[#F14A00] to-[#C62300] bg-clip-text text-transparent"
-    >
-      Actividad
-    </span>
+  <h2 class="text-white text-center text-3xl mt-12 mb-12 font-bold tracking-tight">
+    Actividad
   </h2>
   <div
     id="activity-container"
-    class="w-full max-w-6xl mx-auto px-4 md:px-8 relative"
-    style="height: 450px;"
+    class="w-full max-w-5xl mx-auto p-8 bg-slate-900/50 backdrop-blur-md rounded-3xl border border-white/5 relative"
+    style="height: 400px;"
   >
     <canvas id="activity-chart"></canvas>
   </div>

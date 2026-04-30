@@ -1,44 +1,36 @@
 ---
 const faqs = [
   {
-    question: "¿Qué hace esta herramienta?",
-    answer: "Analiza cualquier repositorio público de GitHub y genera visualizaciones interactivas sobre su stack tecnológico, principales contribuidores y evolución de la actividad de commits. Todo en tiempo real, sin necesidad de clonar el proyecto."
+    question: "¿Por qué hiciste esto?",
+    answer: "Empecé este proyecto para entender cómo funciona la API de GitHub por dentro y para probar Astro en un entorno real. Es mi 'patio de juegos' técnico: quería algo funcional, bien estructurado y que se viera moderno."
   },
   {
-    question: "¿Para qué fue creada?",
-    answer: "Este proyecto nació como una forma de aprender Astro mientras construía algo útil para mi portfolio como desarrollador. Quería demostrar mis habilidades en visualización de datos, consumo de APIs y arquitectura frontend moderna."
+    question: "¿Qué me llevo de esto?",
+    answer: "Fue mi proceso de aprendizaje intensivo. Cada sección es el resultado de ir probando, equivocándome y refactorizando hasta que el código quedó como a mí me gusta. Si aprendí algo, lo apliqué acá."
   },
   {
-    question: "¿Qué datos utiliza?",
-    answer: "Utiliza únicamente la API pública de GitHub para obtener métricas del repositorio. No se guarda ni almacena ningún dato, todo el análisis se realiza en tiempo real y solo tú ves los resultados."
-  },
-  {
-    question: "¿Es gratis y necesito cuenta?",
-    answer: "Es completamente gratis y sin registro. Solo necesitas el nombre de usuario y repositorio de GitHub que quieras analizar. Funciona únicamente con repositorios públicos."
+    question: "¿Es un producto final?",
+    answer: "No. Es un proyecto de aprendizaje. Lo uso para poner en práctica mis ideas de diseño y arquitectura. Cumple su función y me sirve para mostrar cómo trabajo."
   }
 ];
 ---
-<section class="bg-gradient-to-br from-[#500073] via-[#2A004E] to-[#500073] w-full py-16" id="faq-section">
-    <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-4xl font-extrabold text-center mb-12">
-            <span class="bg-gradient-to-r from-[#F14A00] to-[#C62300] bg-clip-text text-transparent">
-                Preguntas Frecuentes
-            </span>
-        </h2>
+<section class="py-20 bg-slate-950" id="faq-section">
+    <div class="max-w-3xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 text-white">Preguntas Frecuentes</h2>
 
         <div class="space-y-4">
             {faqs.map((faq, index) => (
-                <div class="faq-item bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden hover:border-[#F14A00]/50 transition-all duration-300">
-                    <button class="cursor-pointer w-full text-left px-6 py-5 flex justify-between items-center gap-4 text-white hover:bg-white/5 transition-colors"
+                <div class="faq-item bg-transparent rounded-2xl border border-white/5 hover:border-white/10 transition-all duration-300">
+                    <button class="cursor-pointer w-full text-left px-8 py-6 flex justify-between items-center gap-4 text-white hover:bg-white/5 transition-colors rounded-2xl"
                             data-faq={index + 1}>
                         <span class="font-semibold text-lg">{faq.question}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                              stroke="currentColor"
-                             class="size-5 text-[#F14A00] flex-shrink-0 transition-transform duration-300">
+                             class="size-5 text-slate-400 flex-shrink-0 transition-transform duration-300">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
                         </svg>
                     </button>
-                    <p class="hidden faq-answer px-6 pb-5 text-gray-300 leading-relaxed">
+                    <p class="hidden faq-answer px-8 pb-6 text-slate-400 leading-relaxed">
                         {faq.answer}
                     </p>
                 </div>
