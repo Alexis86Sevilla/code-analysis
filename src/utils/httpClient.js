@@ -25,6 +25,14 @@ export async function fetchWithHeaders(url, options = {}) {
     });
     
     clearTimeout(id);
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const error = new Error(errorData.message || `HTTP error! status: ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
+    
     return response;
   } catch (error) {
     clearTimeout(id);

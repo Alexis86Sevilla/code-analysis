@@ -18,21 +18,22 @@ export async function POST(request) {
         fetchWithHeaders(baseUrl + "/stats/commit_activity"),
       ]);
 
-    const overviewResponse = returnStatusFulfilled(response1) && response1.value.ok
+    const overviewResponse = returnStatusFulfilled(response1)
       ? await response1.value.json()
       : null;
 
     if (!overviewResponse) {
-      return new Response(JSON.stringify({ error: "Repositorio no encontrado o límite de API excedido" }), { status: 404 });
+      const errorMsg = response1.status === 'rejected' ? response1.reason.message : "Repositorio no encontrado";
+      return new Response(JSON.stringify({ error: errorMsg }), { status: response1.status === 'rejected' ? response1.reason.status || 500 : 404 });
     }
 
-    const languagesResponse = returnStatusFulfilled(response2) && response2.value.ok
+    const languagesResponse = returnStatusFulfilled(response2)
       ? await response2.value.json()
       : {};
-    const contributorsResponse = returnStatusFulfilled(response3) && response3.value.ok
+    const contributorsResponse = returnStatusFulfilled(response3)
       ? await response3.value.json()
       : [];
-    const commitActivityResponse = returnStatusFulfilled(response4) && response4.value.ok
+    const commitActivityResponse = returnStatusFulfilled(response4)
       ? await response4.value.json()
       : [];
 
