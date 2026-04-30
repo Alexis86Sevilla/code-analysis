@@ -20,7 +20,8 @@ export function processLanguageData(data) {
 }
 
 export function processContributorsData(data) {
-  if (!data || !Array.isArray(data)) return { names: [], contributions: [], top5: [] };
+  if (!data || !Array.isArray(data))
+    return { names: [], contributions: [], top5: [] };
   const results = [...data].sort((a, b) => b.contributions - a.contributions);
   const top5 = results.slice(0, 5);
   return {
@@ -36,18 +37,24 @@ export function processActivityData(data) {
   for (let week of data) {
     const date = new Date(week.week * 1000);
     const month = formatMonth(date);
+    const year = date.getFullYear();
     const monthNumber = date.getMonth();
+    const key = `${month} ${year.toString().slice(2)}`;
     const commits = week.total;
 
-    if (monthsData[month]) {
-      monthsData[month].commits += commits;
+    if (monthsData[key]) {
+      monthsData[key].commits += commits;
     } else {
-      monthsData[month] = { commits: commits, monthNumber: monthNumber };
+      monthsData[key] = {
+        commits: commits,
+        monthNumber: monthNumber,
+        year: year,
+      };
     }
   }
 
   const results = Object.entries(monthsData).sort(
-    (a, b) => a[1].monthNumber - b[1].monthNumber,
+    (a, b) => a[1].year - b[1].year || a[1].monthNumber - b[1].monthNumber,
   );
 
   return {
